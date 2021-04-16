@@ -19,7 +19,7 @@ import org.bouncycastle.math.ec.ECPoint;
 
 /**
  * SM2公钥加密算法实现 包括 -签名,验签 -密钥交换 -公钥加密,私钥解密
- * 
+ *
  * @author Potato
  *
  */
@@ -56,7 +56,7 @@ public class SM2 {
 
 	/**
 	 * 以16进制打印字节数组
-	 * 
+	 *
 	 * @param b
 	 */
 	public static void printHexString(byte[] b) {
@@ -72,7 +72,7 @@ public class SM2 {
 
 	/**
 	 * 随机数生成器
-	 * 
+	 *
 	 * @param max
 	 * @return
 	 */
@@ -92,7 +92,7 @@ public class SM2 {
 
 	/**
 	 * 判断字节数组是否全0
-	 * 
+	 *
 	 * @param buffer
 	 * @return
 	 */
@@ -106,7 +106,7 @@ public class SM2 {
 
 	/**
 	 * 公钥加密
-	 * 
+	 *
 	 * @param input
 	 *            加密原文
 	 * @param publicKey
@@ -190,7 +190,7 @@ public class SM2 {
 
 	/**
 	 * 私钥解密
-	 * 
+	 *
 	 * @param encryptData
 	 *            密文数据字节数组
 	 * @param privateKey
@@ -300,10 +300,10 @@ public class SM2 {
 	//
 	// return buf;
 	// }
-
+	//ceshi
 	/**
 	 * 判断是否在范围内
-	 * 
+	 *
 	 * @param param
 	 * @param min
 	 * @param max
@@ -319,7 +319,7 @@ public class SM2 {
 
 	/**
 	 * 判断生成的公钥是否合法
-	 * 
+	 *
 	 * @param publicKey
 	 * @return
 	 */
@@ -352,7 +352,7 @@ public class SM2 {
 
 	/**
 	 * 生成密钥对
-	 * 
+	 *
 	 * @return
 	 */
 	public SM2KeyPair generateKeyPair() {
@@ -387,7 +387,7 @@ public class SM2 {
 
 	/**
 	 * 导出公钥到本地
-	 * 
+	 *
 	 * @param publicKey
 	 * @param path
 	 */
@@ -407,7 +407,7 @@ public class SM2 {
 
 	/**
 	 * 从本地导入公钥
-	 * 
+	 *
 	 * @param path
 	 * @return
 	 */
@@ -434,7 +434,7 @@ public class SM2 {
 
 	/**
 	 * 导出私钥到本地
-	 * 
+	 *
 	 * @param privateKey
 	 * @param path
 	 */
@@ -453,7 +453,7 @@ public class SM2 {
 
 	/**
 	 * 从本地导入私钥
-	 * 
+	 *
 	 * @param path
 	 * @return
 	 */
@@ -476,7 +476,7 @@ public class SM2 {
 
 	/**
 	 * 字节数组拼接
-	 * 
+	 *
 	 * @param params
 	 * @return
 	 */
@@ -496,7 +496,7 @@ public class SM2 {
 
 	/**
 	 * sm3摘要
-	 * 
+	 *
 	 * @param params
 	 * @return
 	 */
@@ -513,7 +513,7 @@ public class SM2 {
 
 	/**
 	 * 取得用户标识字节数组
-	 * 
+	 *
 	 * @param IDA
 	 * @param aPublicKey
 	 * @return
@@ -530,7 +530,7 @@ public class SM2 {
 
 	/**
 	 * 签名
-	 * 
+	 *
 	 * @param M
 	 *            签名信息
 	 * @param IDA
@@ -564,7 +564,7 @@ public class SM2 {
 
 	/**
 	 * 验签
-	 * 
+	 *
 	 * @param M
 	 *            签名信息
 	 * @param signature
@@ -599,7 +599,7 @@ public class SM2 {
 
 	/**
 	 * 密钥派生函数
-	 * 
+	 *
 	 * @param Z
 	 * @param klen
 	 *            生成klen字节数长度的密钥
@@ -628,7 +628,7 @@ public class SM2 {
 
 	/**
 	 * 传输实体类
-	 * 
+	 *
 	 * @author Potato
 	 *
 	 */
@@ -648,7 +648,7 @@ public class SM2 {
 
 	/**
 	 * 密钥协商辅助类
-	 * 
+	 *
 	 * @author Potato
 	 *
 	 */
@@ -658,7 +658,7 @@ public class SM2 {
 		ECPoint V;
 		byte[] Z;
 		byte[] key;
-		
+
 		String ID;
 		SM2KeyPair keyPair;
 
@@ -670,7 +670,7 @@ public class SM2 {
 
 		/**
 		 * 密钥协商发起第一步
-		 * 
+		 *
 		 * @return
 		 */
 		public TransportEntity keyExchange_1() {
@@ -683,7 +683,7 @@ public class SM2 {
 
 		/**
 		 * 密钥协商响应方
-		 * 
+		 *
 		 * @param entity 传输实体
 		 * @return
 		 */
@@ -692,7 +692,7 @@ public class SM2 {
 			// BigInteger rB=new BigInteger("33FE2194 0342161C 55619C4A 0C060293
 			// D543C80A F19748CE 176D8347 7DE71C80".replace(" ", ""),16);
 			ECPoint RB = G.multiply(rB).normalize();
-			
+
 			this.rA=rB;
 			this.RA=RB;
 
@@ -701,7 +701,7 @@ public class SM2 {
 
 			BigInteger tB = keyPair.getPrivateKey().add(x2.multiply(rB)).mod(n);
 			ECPoint RA = curve.decodePoint(entity.R).normalize();
-			
+
 			BigInteger x1 = RA.getXCoord().toBigInteger();
 			x1 = _2w.add(x1.and(_2w.subtract(BigInteger.ONE)));
 
@@ -711,7 +711,7 @@ public class SM2 {
 			if (V.isInfinity())
 				throw new IllegalStateException();
 			this.V=V;
-			
+
 			byte[] xV = V.getXCoord().toBigInteger().toByteArray();
 			byte[] yV = V.getYCoord().toBigInteger().toByteArray();
 			byte[] KB = KDF(join(xV, yV, entity.Z, this.Z), 16);
@@ -727,7 +727,7 @@ public class SM2 {
 
 		/**
 		 * 密钥协商发起方第二步
-		 * 
+		 *
 		 * @param entity 传输实体
 		 */
 		public TransportEntity keyExchange_3(TransportEntity entity) {
@@ -736,7 +736,7 @@ public class SM2 {
 
 			BigInteger tA = keyPair.getPrivateKey().add(x1.multiply(rA)).mod(n);
 			ECPoint RB = curve.decodePoint(entity.R).normalize();
-			
+
 			BigInteger x2 = RB.getXCoord().toBigInteger();
 			x2 = _2w.add(x2.and(_2w.subtract(BigInteger.ONE)));
 
@@ -746,7 +746,7 @@ public class SM2 {
 			if (U.isInfinity())
 				throw new IllegalStateException();
 			this.V=U;
-			
+
 			byte[] xU = U.getXCoord().toBigInteger().toByteArray();
 			byte[] yU = U.getYCoord().toBigInteger().toByteArray();
 			byte[] KA = KDF(join(xU, yU,
@@ -766,13 +766,13 @@ public class SM2 {
 					sm3hash(xU, this.Z, entity.Z, RA.getXCoord().toBigInteger().toByteArray(),
 							RA.getYCoord().toBigInteger().toByteArray(), RB.getXCoord().toBigInteger().toByteArray(),
 							RB.getYCoord().toBigInteger().toByteArray()));
-			
+
 			return new TransportEntity(RA.getEncoded(false), sA,this.Z,keyPair.getPublicKey());
 		}
-		
+
 		/**
 		 * 密钥确认最后一步
-		 * 
+		 *
 		 * @param entity 传输实体
 		 */
 		public void keyExchange_4(TransportEntity entity) {
